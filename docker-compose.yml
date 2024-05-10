@@ -2,5 +2,6 @@ version : "3.3"
 services :
    web :
      image : trainwithshubham/my-note-app:latest
+     container_name: django_notes_app
      ports :
          - "8000:8000"
