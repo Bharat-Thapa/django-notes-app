@@ -4,11 +4,12 @@
 
 # Function to clone the Django app code
 code_clone() {
+    cd ..
     echo "Cloning the Django app..."
     if [ -d "django-notes-app" ]; then
         echo "The code directory already exists. Skipping clone."
     else
-        git clone https://github.com/LondheShubham153/django-notes-app.git || {
+        git clone https://github.com/Bharat-Thapa/django-notes-app.git || {
             echo "Failed to clone the code."
             return 1
         }
@@ -40,8 +41,12 @@ required_restarts() {
 
 # Function to deploy the Django app
 deploy() {
+    cd django-notes-app || {
+    echo "Failed to navigate to Django-Todo-App directory."
+    return 1
+    }
     echo "Building and deploying the Django app..."
-    docker build -t notes-app . && docker compose up -d || {
+    docker compose up -d || {
         echo "Failed to build and deploy the app."
         return 1
     }
@@ -52,7 +57,7 @@ echo "********** DEPLOYMENT STARTED *********"
 
 # Clone the code
 if ! code_clone; then
-    cd django-notes-app || exit 1
+    exit 1
 fi
 
 # Install dependencies
