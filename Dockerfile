@@ -16,7 +16,7 @@ FROM python:3.9-slim AS production
 
 WORKDIR /app
 
-COPY --from=builder /app/backend .
+COPY --from=builder /app .
 
 RUN pip install -r requirements.txt
 
